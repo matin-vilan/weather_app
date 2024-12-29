@@ -7,17 +7,24 @@ import { useCurrentQueryAction } from "@services/current";
 import { CurrentFuncKeys } from "@services/queryFuncKeys";
 import { ICurrentResponse, ILatLonDTO } from "@services/current/types";
 import { getLocalStorage, setLocalStorage } from "@utils/storage";
-import { PROJECT_STORAGE_NAME, STORAGE_UNIT_NAME } from "@constants/index";
+import { STORAGE_LOCATION_NAME, STORAGE_UNIT_NAME } from "@constants/index";
 import { formatDateTime, handleUnits } from "@utils/transformers";
 import { EUnitsType } from "~types/index";
 import { AppProvider } from "@src/App";
+import { useMemo } from "react";
 
 const HomeContainer = () => {
   const { units, setUnit } = AppProvider.useContext();
-  useGetCurrentLocation();
-  const location = JSON.parse(
-    getLocalStorage(`${PROJECT_STORAGE_NAME}/location`) || ""
-  );
+  const { location: geoLoc } = useGetCurrentLocation();
+
+  const location = useMemo(() => {
+    const storedLocation = getLocalStorage(STORAGE_LOCATION_NAME);
+    if (storedLocation && storedLocation !== null) {
+      return JSON.parse(storedLocation);
+    }
+    return null;
+  }, [geoLoc]);
+
   const { data, isLoading } = useCurrentQueryAction<
     ICurrentResponse,
     ILatLonDTO

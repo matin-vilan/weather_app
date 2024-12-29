@@ -4,3 +4,4 @@ export const DIRECTION_STORAGE_NAME = "DIRECTION_MODE";
 export const PROJECT_STORAGE_NAME = "@weatherApp";
 export const ICON_SRC = "https://cdn.weatherbit.io/static/img/icons/myIcon.png";
 export const STORAGE_UNIT_NAME = `${PROJECT_STORAGE_NAME}/units`;
+export const STORAGE_LOCATION_NAME = `${PROJECT_STORAGE_NAME}/location`;
