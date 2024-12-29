@@ -68,7 +68,9 @@ const HomeContainer = () => {
       ) : (
         <Flex gap={4} flexDir="column" align="center">
           <Image src="/images/demo.png" alt="demo" w="170px" h="150px" />
-          <Text variant="boldTitle">{weatherInfo?.temp}°</Text>
+          <Text variant="boldTitle">
+            {weatherInfo?.temp}°{handleUnits(units)}
+          </Text>
           <TitleTemp
             title={weatherInfo?.city_name}
             rightText={`SUNRISE: ${weatherInfo?.sunrise} AM`}
