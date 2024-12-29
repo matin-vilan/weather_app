@@ -33,15 +33,10 @@ baseApi.interceptors.request.use((config) => {
 
 baseApi.interceptors.response.use(
   (res: AxiosResponse) => {
-    const message = res?.data?.message?.fa || res?.data?.message;
-    const url = res?.config?.url;
-
     return res;
   },
   (err: AxiosError<Response<null>>) => {
     const { data, status } = err.response!;
-    // const message = data?.message?.fa || data?.message.en;
-    const url = err?.config?.url;
 
     switch (status) {
       case 400:

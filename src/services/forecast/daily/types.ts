@@ -1,3 +1,5 @@
+import { EUnitsType } from "@src/types";
+
 export interface IDailyData {
   valid_date: string;
   ts: number;
