@@ -1,12 +1,9 @@
-import { AxiosError } from "axios";
-
 export interface Response<T> {
   data: T;
 }
 
-export type ErrorType = AxiosError<{
-  Errors: string[];
-  IsSuccess: boolean;
-  Message: string;
-  Value: string;
-}>;
+export enum EUnitsType {
+  M = "M",
+  S = "S",
+  I = "I",
+}

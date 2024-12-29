@@ -1,36 +1,36 @@
-import { CurrentFuncKeys } from "@services/queryFuncKeys";
+import { HourlyFuncKeys } from "@services/queryFuncKeys";
 import {
   MutationFunction,
   useMutation,
   useQuery,
   useQueryClient,
 } from "@tanstack/react-query";
-import { CurrentWeatherService } from "./current.service";
+import { HourlyWeatherService } from "./hourly.service";
 
-const currentService = new CurrentWeatherService();
+const hourlyService = new HourlyWeatherService();
 
-export const useCurrentQueryAction = <T, K>(
-  funcName: CurrentFuncKeys,
+export const useHourlyQueryAction = <T, K>(
+  funcName: HourlyFuncKeys,
   data: K,
   enabled: boolean
 ) => {
   return useQuery({
     queryKey: [funcName, data],
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    queryFn: () => currentService[funcName](data as any) as T,
+    queryFn: () => hourlyService[funcName](data as any) as T,
     enabled,
   });
 };
 
-export const useCurrentMutationAction = <T, K>(
-  funcName: CurrentFuncKeys,
-  invalidateTag?: CurrentFuncKeys
+export const useHourlyMutationAction = <T, K>(
+  funcName: HourlyFuncKeys,
+  invalidateTag?: HourlyFuncKeys
 ) => {
   const queryClient = useQueryClient();
 
   return useMutation({
     mutationKey: [funcName],
-    mutationFn: currentService[funcName] as MutationFunction<T, K>,
+    mutationFn: hourlyService[funcName] as MutationFunction<T, K>,
 
     onSettled: () => {
       if (invalidateTag) {

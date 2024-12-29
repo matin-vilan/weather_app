@@ -17,7 +17,7 @@ const baseURL =
   "https://api.test.com";
 
 export const baseApi = axios.create({
-  baseURL: `${baseURL}?key=${import.meta.env.VITE_APP_API_KEY}`,
+  baseURL: `${baseURL}`,
   headers: {
     "Content-Type": "application/json",
   },
@@ -76,10 +76,10 @@ const responseBody = <T>(response: AxiosResponse<T>) => response.data;
 
 // prettier-ignore
 const request = {
-  get: <T>(endpoint: string, headers?: AxiosHeaders) => baseApi.get<Response<T>>(endpoint, { headers }).then(responseBody),
-  post: <T>(endpoint: string, body?: object, headers?: AxiosRequestConfig<object>) => baseApi.post<Response<T>>(endpoint, body, headers).then(responseBody),
-  put: <T>(endpoint: string, body?: object, headers?: AxiosRequestConfig<object>) => baseApi.put<Response<T>>(endpoint, body, headers).then(responseBody),
-  delete: <T>(endpoint: string, headers?: AxiosRequestConfig<object>) => baseApi.delete<Response<T>>(endpoint, headers).then(responseBody),
+  get: <T>(endpoint: string, headers?: AxiosHeaders) => baseApi.get<T>(endpoint, { headers }).then(responseBody),
+  post: <T>(endpoint: string, body?: object, headers?: AxiosRequestConfig<object>) => baseApi.post<T>(endpoint, body, headers).then(responseBody),
+  put: <T>(endpoint: string, body?: object, headers?: AxiosRequestConfig<object>) => baseApi.put<T>(endpoint, body, headers).then(responseBody),
+  delete: <T>(endpoint: string, headers?: AxiosRequestConfig<object>) => baseApi.delete<T>(endpoint, headers).then(responseBody),
 };
 
 export default request;

@@ -23,4 +23,10 @@ body,
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  width: 100%;
+  height: 100%;
+}
+
+.appBgColor {
+  background: linear-gradient (to bottom, #3b007d, #8741c5);
 }

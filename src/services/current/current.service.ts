@@ -1,4 +1,3 @@
-import { Response } from "~types/index";
 import {
   ICitiesDTO,
   ICityDTO,
@@ -13,60 +12,58 @@ import {
 import request from "@libs/axios";
 import { objectToQueryString } from "@utils/transformers";
 
-const entity = "current";
-export type ResponseType = ICurrentResponse[];
-export type CurrentResType = Response<ResponseType>;
+const entity = `current?key=${import.meta.env.VITE_APP_API_KEY}`;
 
 interface ICurrentWeatherService {
-  byLatLon(props: ILatLonDTO): Promise<CurrentResType>;
-  byCity(props: ICityDTO): Promise<CurrentResType>;
-  byPostalCode(props: IPostalCodeDTO): Promise<CurrentResType>;
-  byCityId(props: ICityIdDTO): Promise<CurrentResType>;
-  bySlation(props: ISlationDTO): Promise<CurrentResType>;
-  byPoints(props: IPointsDTO): Promise<CurrentResType>;
-  forCities(props: ICitiesDTO): Promise<CurrentResType>;
-  forSlations(props: IStationsDTO): Promise<CurrentResType>;
+  byLatLon(props: ILatLonDTO): Promise<ICurrentResponse>;
+  byCity(props: ICityDTO): Promise<ICurrentResponse>;
+  byPostalCode(props: IPostalCodeDTO): Promise<ICurrentResponse>;
+  byCityId(props: ICityIdDTO): Promise<ICurrentResponse>;
+  bySlation(props: ISlationDTO): Promise<ICurrentResponse>;
+  byPoints(props: IPointsDTO): Promise<ICurrentResponse>;
+  forCities(props: ICitiesDTO): Promise<ICurrentResponse>;
+  forSlations(props: IStationsDTO): Promise<ICurrentResponse>;
 }
 
 export class CurrentWeatherService implements ICurrentWeatherService {
-  async byLatLon(props: ILatLonDTO): Promise<CurrentResType> {
-    return await request.get<ResponseType>(
-      `/${entity}?${objectToQueryString(props)}`
+  async byLatLon(props: ILatLonDTO): Promise<ICurrentResponse> {
+    return await request.get<ICurrentResponse>(
+      `/${entity}&${objectToQueryString(props)}`
     );
   }
-  async byCity(props: ICityDTO): Promise<CurrentResType> {
-    return await request.get<ResponseType>(
-      `/${entity}?${objectToQueryString(props)}`
+  async byCity(props: ICityDTO): Promise<ICurrentResponse> {
+    return await request.get<ICurrentResponse>(
+      `/${entity}&${objectToQueryString(props)}`
     );
   }
-  async byPostalCode(props: IPostalCodeDTO): Promise<CurrentResType> {
-    return await request.get<ResponseType>(
-      `/${entity}?${objectToQueryString(props)}`
+  async byPostalCode(props: IPostalCodeDTO): Promise<ICurrentResponse> {
+    return await request.get<ICurrentResponse>(
+      `/${entity}&${objectToQueryString(props)}`
     );
   }
-  async byCityId(props: ICityIdDTO): Promise<CurrentResType> {
-    return await request.get<ResponseType>(
-      `/${entity}?${objectToQueryString(props)}`
+  async byCityId(props: ICityIdDTO): Promise<ICurrentResponse> {
+    return await request.get<ICurrentResponse>(
+      `/${entity}&${objectToQueryString(props)}`
     );
   }
-  async bySlation(props: ISlationDTO): Promise<CurrentResType> {
-    return await request.get<ResponseType>(
-      `/${entity}?${objectToQueryString(props)}`
+  async bySlation(props: ISlationDTO): Promise<ICurrentResponse> {
+    return await request.get<ICurrentResponse>(
+      `/${entity}&${objectToQueryString(props)}`
     );
   }
-  async byPoints(props: IPointsDTO): Promise<CurrentResType> {
-    return await request.get<ResponseType>(
-      `/${entity}?${objectToQueryString(props.points.join(","))}`
+  async byPoints(props: IPointsDTO): Promise<ICurrentResponse> {
+    return await request.get<ICurrentResponse>(
+      `/${entity}&${objectToQueryString(props.points.join(","))}`
     );
   }
-  async forCities(props: ICitiesDTO): Promise<CurrentResType> {
-    return await request.get<ResponseType>(
-      `/${entity}?${objectToQueryString(props.cities.join(","))}`
+  async forCities(props: ICitiesDTO): Promise<ICurrentResponse> {
+    return await request.get<ICurrentResponse>(
+      `/${entity}&${objectToQueryString(props.cities.join(","))}`
     );
   }
-  async forSlations(props: IStationsDTO): Promise<CurrentResType> {
-    return await request.get<ResponseType>(
-      `/${entity}?${objectToQueryString(props.stations.join(","))}`
+  async forSlations(props: IStationsDTO): Promise<ICurrentResponse> {
+    return await request.get<ICurrentResponse>(
+      `/${entity}&${objectToQueryString(props.stations.join(","))}`
     );
   }
 }

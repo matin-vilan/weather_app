@@ -15,14 +15,14 @@ export function setCookie({
 }: SetCookieType) {
   let expires = "";
   if (expireInTimeStamp) {
-    let date = new Date();
-    let expireTime = 1000 * expireInTimeStamp;
+    const date = new Date();
+    const expireTime = 1000 * expireInTimeStamp;
     date.setTime(expireTime);
     expires = "; expires=" + date.toUTCString();
   } else if (expireInSeconds) {
-    let date = new Date();
-    let time = date.getTime();
-    let expireTime = time + expireInSeconds;
+    const date = new Date();
+    const time = date.getTime();
+    const expireTime = time + expireInSeconds;
     date.setTime(expireTime);
     expires = "; expires=" + date.toUTCString();
   } else {
@@ -35,8 +35,8 @@ export function setCookie({
 }
 
 export function getCookie(name: string) {
-  let nameEQ = name + "=";
-  let ca = document.cookie.split(";");
+  const nameEQ = name + "=";
+  const ca = document.cookie.split(";");
   for (let i = 0; i < ca.length; i++) {
     let c = ca[i];
     while (c.charAt(0) == " ") c = c.substring(1, c.length);
